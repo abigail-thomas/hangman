@@ -47,16 +47,20 @@ while True:
 
     # loop until user guesses correct word or runs of ouf guesses
     while ("".join(spaces)) != word_to_guess:
-        
-        # if guessed correctly
-        if user_guess in word_to_guess:
-            guesses.append(user_guess)
-            print("\n")
             
         # if guessed incorrectly
-        else:
+        if user_guess not in word_to_guess:
             incorrect_guesses += 1 
             print("\n{} is not in the word :(".format(user_guess))
+            if incorrect_guesses < 5:
+                print("\nYou have {} guesses left.".format(6 - incorrect_guesses))
+            elif incorrect_guesses == 1:
+                print("\n You have {} guess left.".format(6 - incorrect_guesses))
+
+        # if guessed correctly
+        else:
+            guesses.append(user_guess)
+            print("\n")
             
         # add to the hangman depending on number of incorrect guesses
         if incorrect_guesses == 0:
@@ -74,6 +78,8 @@ while True:
         else:
             print("_______\n|     |\n|     |\n|   ﻿(._.)﻿﻿﻿﻿ ﻿﻿﻿﻿\n|    /|\\\n|    / \\\n|     \n|     \n-----")
             break
+
+        
                
         # replace user guess with blank space in alphabet
         if user_guess in alphabet:
